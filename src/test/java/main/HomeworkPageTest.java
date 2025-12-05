@@ -4,14 +4,18 @@ import components.CatalogCoursesComponent;
 import components.popups.AuthPopup;
 import extensions.UiExtension;
 import jakarta.inject.Inject;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
+import org.openqa.selenium.WebElement;
 import pages.CategoriesPage;
-import pages.OtusPage;
+import pages.MainPage;
+
+import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
 
 @ExtendWith(UiExtension.class)
-public class OtusPageTest {
+public class HomeworkPageTest {
 
     @Inject
     protected CatalogCoursesComponent catalogCoursesComponent;
@@ -23,50 +27,77 @@ public class OtusPageTest {
     protected CategoriesPage categoriesPage;
 
     @Inject
-    protected OtusPage otusPage;
+    protected MainPage mainPage;
 
     @Test
-    public void clickCategoriesTitle() {
+    @DisplayName("Выбор случайной категории курсов")
+    public void testRandomLearningCategorySelection() {
 
         String title =
 
-                otusPage.open()
+                mainPage.open()
                         .getLearningCategory(1);
 
+        mainPage.goToLearningSection(title);
 
-        otusPage
-                .goToLearningSection(title)
-                .pageHeaderShowIdBySameUs(title);
+        categoriesPage.pageHeaderShowIdBySameUs(title);
 
-
-        catalogCoursesComponent
-                .getComponentEntry()
+        catalogCoursesComponent.getComponentEntry()
                 .click();
 
         authPopup.popupShouldBeVisible()
-                .popupShouldNotBeVisible()
                 .closePopup();
-    }
 
+        WebElement firstCategoryElement =
+
+                mainPage.firstCategoryElement(1);
+        mainPage.waitUntilElementIsVisible(firstCategoryElement);
+        assertThat(
+                mainPage.checkElementContainsText(firstCategoryElement, "Программирование"));
+
+    }
 
     @Test
-    public void selectCourseByName() {
+    @DisplayName("Проверка выбора курса по имени")
+    public void testSelectCourseByName() {
 
+        categoriesPage.open("courses", "categories=programming");
 
-        categoriesPage
-                .open("courses", "programming")
-                .findCourseByName("QA Automation Engineer");
+        String courseName =
+                CatalogCoursesComponent.COURSE_NAME;
 
+        categoriesPage.pageHeaderShowIdBySameUs(courseName);
+
+        categoriesPage.clickSelectedCourseByName(courseName)
+                .findCourseByName(courseName);
 
         catalogCoursesComponent
                 .getComponentEntry()
                 .click();
 
-
         authPopup.popupShouldBeVisible()
-                .popupShouldNotBeVisible()
                 .closePopup();
+
+        WebElement courseDescriptionElement =
+                mainPage.findElementByCSS(".sc-s2pydo-1");
+        mainPage.waitUntilElementIsVisible(courseDescriptionElement);
+        assertThat(courseDescriptionElement.getText()).contains(courseName);
 
     }
 
+    @Test
+    @DisplayName("Проверка курсов с самой ранней и поздней датой старта")
+    public void testFindEarliestAndLatestCourses() throws Exception {
+
+        categoriesPage.open("courses", "categories=programming");
+
+        catalogCoursesComponent.verifyEarliestAndLatestCourses();
+
+        catalogCoursesComponent
+                .getComponentEntry()
+                .click();
+
+        authPopup.popupShouldBeVisible()
+                .closePopup();
+    }
 }
