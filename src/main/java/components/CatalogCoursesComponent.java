@@ -1,5 +1,10 @@
 package components;
 
+<<<<<<< HEAD
+=======
+// Импортируем нужные классы
+
+>>>>>>> 4f50a07e6427193872621e3257ef942a79a86db2
 import annotations.Component;
 import org.apache.commons.lang3.time.DateUtils;
 import org.jsoup.Jsoup;
@@ -82,4 +87,8 @@ public class CatalogCoursesComponent extends AbsComponent {
                     .isEqualTo(DateUtils.parseDate(course.getAttribute("data-start-date")));
         }
     }
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> 4f50a07e6427193872621e3257ef942a79a86db2

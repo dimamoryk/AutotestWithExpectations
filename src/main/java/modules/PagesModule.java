@@ -22,4 +22,8 @@ public class PagesModule extends AbstractModule {
         bind(AuthPopup.class).toInstance(new AuthPopup(driver));
         bind(CatalogCoursesComponent.class).toInstance(new CatalogCoursesComponent(driver));
     }
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> 4f50a07e6427193872621e3257ef942a79a86db2

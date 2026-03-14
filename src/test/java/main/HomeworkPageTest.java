@@ -45,8 +45,12 @@ public class HomeworkPageTest {
         catalogCoursesComponent.getComponentEntry()
                 .click();
 
+<<<<<<< HEAD
         authPopup.popupShouldNotBeVisible()
                 .popupShouldBeVisible()
+=======
+        authPopup.popupShouldBeVisible()
+>>>>>>> 4f50a07e6427193872621e3257ef942a79a86db2
                 .closePopup();
 
         WebElement firstCategoryElement =
@@ -76,8 +80,12 @@ public class HomeworkPageTest {
                 .getComponentEntry()
                 .click();
 
+<<<<<<< HEAD
         authPopup.popupShouldNotBeVisible()
                 .popupShouldBeVisible()
+=======
+        authPopup.popupShouldBeVisible()
+>>>>>>> 4f50a07e6427193872621e3257ef942a79a86db2
                 .closePopup();
 
         WebElement courseDescriptionElement =
@@ -99,8 +107,12 @@ public class HomeworkPageTest {
                 .getComponentEntry()
                 .click();
 
+<<<<<<< HEAD
         authPopup.popupShouldNotBeVisible()
                 .popupShouldBeVisible()
+=======
+        authPopup.popupShouldBeVisible()
+>>>>>>> 4f50a07e6427193872621e3257ef942a79a86db2
                 .closePopup();
     }
 }
