@@ -45,7 +45,8 @@ public class HomeworkPageTest {
         catalogCoursesComponent.getComponentEntry()
                 .click();
 
-        authPopup.popupShouldBeVisible()
+        authPopup.popupShouldNotBeVisible()
+                .popupShouldBeVisible()
                 .closePopup();
 
         WebElement firstCategoryElement =
@@ -75,7 +76,8 @@ public class HomeworkPageTest {
                 .getComponentEntry()
                 .click();
 
-        authPopup.popupShouldBeVisible()
+        authPopup.popupShouldNotBeVisible()
+                .popupShouldBeVisible()
                 .closePopup();
 
         WebElement courseDescriptionElement =
@@ -97,7 +99,8 @@ public class HomeworkPageTest {
                 .getComponentEntry()
                 .click();
 
-        authPopup.popupShouldBeVisible()
+        authPopup.popupShouldNotBeVisible()
+                .popupShouldBeVisible()
                 .closePopup();
     }
 }
